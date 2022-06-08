@@ -16,7 +16,7 @@ The lecture plan:
 * Detector concepts:
   * [Particle tracking](04_Tracking)
   * [Calorimeters](05_Calorimeters) 
-  * Particle identification and large detector systems
+  * [Particle identification and large detector systems](06_PID)
 
 The software necessary for the exercises can be run using the container technology on any computer (Linux, Windows, Mac).
 Instructions are [here](Docker/Instructions_Docker.md)
