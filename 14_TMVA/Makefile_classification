@@ -1,0 +1,30 @@
+######################################################################
+# Code   : Example usage for TMVA analyses                           #
+# Usage:
+# make  -f Makefile_classification 
+###################################################################### 
+BIN = classification 
+
+CXX = g++
+CCFLAGS = $(shell root-config --cflags)
+
+
+LD = g++
+LDFLAGS = 
+
+# Libraries from official TMVA example
+#LIBS = $(shell root-config --libs) -lMLP -lMinuit -lTreePlayer -lTMVA -lTMVAGui -lXMLIO  -lMLP -lm
+LIBS = $(shell root-config --libs)  -lTMVA -lTMVAGui 
+
+
+default : $(BIN)
+
+$(BIN): % : %.cpp 
+	@echo -n "Building $@ ... "
+	$(CXX) $(CCFLAGS) $< $(LIBS) -o $@
+	@echo "Done"
+
+
+clean: 
+	rm -f *.o $(BIN)
+

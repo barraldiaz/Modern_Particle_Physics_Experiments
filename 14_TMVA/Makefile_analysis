@@ -1,0 +1,23 @@
+######################################################################
+# Makefile for file analysis.cpp 
+# Usage:
+# make -f Makefile_analysis 
+###################################################################### 
+BINS = analysis 
+
+CXX = g++
+CCFLAGS = $(shell root-config --cflags)
+
+LD = g++
+LDFLAGS = 
+
+LIBS = $(shell root-config --libs) -lTMVA -lTMVAGui 
+
+default : $(BINS)
+
+$(BINS): % : %.cpp 
+	$(CXX) $(CCFLAGS) $< $(LIBS) -o $@
+
+clean: 
+	rm -f *.o $(BINS)
+

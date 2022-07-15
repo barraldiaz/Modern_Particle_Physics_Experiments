@@ -1,0 +1,9 @@
+######################################################################
+# Makefile for file analysis.cpp - simple version
+# Usage:
+# make -f Makefile_simple
+###################################################################### 
+
+all: analysis	
+analysis: analysis.cpp
+	g++ -o $@ $(shell root-config --cflags --libs) -lTMVA -lTMVAGui  -lm $<
