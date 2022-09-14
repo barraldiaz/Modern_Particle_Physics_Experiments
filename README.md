@@ -19,7 +19,7 @@ The lecture plan:
   * [Particle identification and large detector systems](06_PID)
 
 The software necessary for the exercises can be run using the container technology on any computer (Linux, Windows, Mac).
-Instructions are [here](Docker/Instructions_Docker.md)
+Instructions are [here](Docker/README.md)
 
 This repository can be:
 
