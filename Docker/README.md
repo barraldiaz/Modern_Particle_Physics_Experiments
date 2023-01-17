@@ -4,7 +4,7 @@ During the class we will use multiple packages and programs specific for high en
 
 You can check the full list of packages installed in the image we will use: [akalinow/root-fedora35](https://hub.docker.com/r/akalinow/root-fedora35).
 
-## Running at computer lab
+## Running at computer lab or any other computer **within** the faculty network. Computers connected to FUW.Open or Eduroam are **not** within the faculty network
 
 During classes at the computer lab we will use Apptainer/Singularity containers. 
 
@@ -81,5 +81,5 @@ Depending on your system you can use either Apptainer/Singularity (Linux) or Doc
 
 5. All files created within the container in `scratch` directory are visible in the host system:
     - on Windows in directory `Docker` located in the user directory,
-    - on Linux in the root directory, `\`.
+    - on Linux in the home directory, `/home/$USER`.
 
