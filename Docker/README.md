@@ -57,7 +57,7 @@ Depending on your system you can use either Apptainer/Singularity (Linux) or Doc
     - [runDocker.sh](runDocker.sh) on MacOS and Linux:
         ```sh
         # download
-        wget https://raw.githubusercontent.com/akalinow/Modern_Particle_Physics_Experiments/2021_2022/Docker/runDocker.sh
+        wget https://raw.githubusercontent.com/akalinow/Modern_Particle_Physics_Experiments/2022_2023/Docker/runDocker.sh
         # run
         . runDocker.sh
         ```
