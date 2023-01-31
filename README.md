@@ -1,36 +1,20 @@
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/akalinow/Modern_Particle_Physics_Experiments/blob/2021_2022)
-
 
 # Modern Particle Physics Experiments
-Notebooks for the Modern Particle Physics Experiments at Faulty of Physics, University of Warsaw
+Notebooks for the [Modern Particle Physics Experiments](https://usosweb.fuw.edu.pl/kontroler.php?_action=katalog2%2Fprzedmioty%2FpokazPrzedmiot&kod=1100-4MPPE&lang=en) at Faulty of Physics, University of Warsaw
 
-The lecture plan:
 
-* Simulation tools:
-  * [Introduction to ROOT package](01_Introduction_to_ROOT.ipynb)
-  
-  * [Monte Carlo methods](02_Monte_Carlo_methods.ipynb)
-  
-  * [Physics event generation](03_Event_generation/03_Event_generation.ipynb)
-
-* Detector concepts:
-  * [Particle tracking](04_Tracking)
-  * [Calorimeters](05_Calorimeters) 
-  * [Particle identification and large detector systems](06_PID)
-
-The software necessary for the exercises can be run using the container technology on any computer (Linux, Windows, Mac).
-Instructions are [here](Docker/README.md)
+The software necessary for the exercises can be run using the container technology on any computer (Linux, Windows, Mac). Instructions are [here](Docker/README.md)
 
 This repository can be:
 
 * cloned with:
 
-```
-git clone --branch 2021_2022_students_version https://github.com/akalinow/Modern_Particle_Physics_Experiments.git
+```Shell
+git clone --branch 2022_2023 https://github.com/akalinow/Modern_Particle_Physics_Experiments.git
 ```
 
 * updated with:
 
-```
-git pull origin 2021_2022_students_version 
+```Shell
+git pull origin 2022_2023
 ```

@@ -27,7 +27,7 @@ After this command, the prompt should change to `Apptainer>` which indicates tha
 Inside the container you can start the `jupyter-lab` with:
 
 ``` sh
-jupyter-lab --no-browser --ip=zcobl3.hep.fuw.edu.pl
+jupyter-lab --no-browser --ip=zcobl3.hep.fuw.edu.pl --notebook-dir=$HOME
 ```
 
 The `jupyter` should write a bunch of lines to the terminal. Find and copy the URL starting with `http://zcobl3`, then open a web browser and paste it.
@@ -82,4 +82,37 @@ Depending on your system you can use either Apptainer/Singularity (Linux) or Doc
 5. All files created within the container in `scratch` directory are visible in the host system:
     - on Windows in directory `Docker` located in the user directory,
     - on Linux in the home directory, `/home/$USER`.
+    
+ **Note:** put all your work under the `scratch` directory. All other files might be lost after closing the Docker, i.e computer restart.
+ 
+ 
+ ## Using the faculty server zcobl3.hep.fuw.edu.pl from outside the Faculty network
+
+The Faculty computers are only can be access through a gateway computer ```tempac```. In this case you need to make a "hop" through tempac before reaching zcobl3. This can be easily hidden with ssh configuration:
+
+* Create a file (on Win or Linux): ```.ssh/config``` with following content: 
+
+```Shell
+Host zcobl3
+     ForwardX11 yes
+     ForwardAgent yes
+     UserKnownHostsFile ~/.ssh/known_hosts
+     Hostname zcobl3.hep.fuw.edu.pl
+     LocalForward 8000 localhost:8000
+     RequestTTY yes
+     ProxyJump YOUR_LOGIN_ON_TEMPAC@tempac.okwf.fuw.edu.pl:22
+     RemoteCommand ./Modern_Particle_Physics_Experiments/Docker/runSingularity.sh
+     User YOUR_LOGIN_ON_ZCOBL3
+```
+* open terminal or PowerShell login, and start Jupyter:
+
+```Shell
+ssh zcobl3
+jupyter-lab --no-browser --ip=0.0.0.0 –port=8000 --notebook-dir=$HOME
+```
+
+**Note**: every person connecting to the served has to use a different port number, ```8000``` here. Port change has to be done in two places
+* the ```.ssh/config``` file
+* the command running the jupyter-lab
+
 
