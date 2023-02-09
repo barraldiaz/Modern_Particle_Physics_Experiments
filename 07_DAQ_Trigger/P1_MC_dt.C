@@ -98,7 +98,7 @@ void gen_MC(Int_t N_gen, Int_t &N_acc, Double_t tau, Double_t dead_time) {
   Double_t dead_time_frac;
 
   Int_t i_acc = 0;
-  
+
   // in DATA we count the events from 1, do the same in MC
   for(int i_gen = 1; i_gen <= N_gen; i_gen++) {
 
