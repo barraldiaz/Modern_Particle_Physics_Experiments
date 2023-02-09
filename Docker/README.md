@@ -4,13 +4,23 @@ During the class we will use multiple packages and programs specific for high en
 
 You can check the full list of packages installed in the image we will use: [akalinow/root-fedora35](https://hub.docker.com/r/akalinow/root-fedora35).
 
-## Running at computer lab or any other computer **within** the faculty network. Computers connected to FUW.Open or Eduroam are **not** within the faculty network
+## Running at computer lab 
 
-During classes at the computer lab we will use Apptainer/Singularity containers. 
+An Apptainer/Singularity container for the Workshop is available from computers at the computer lab.
+After login please run:
+
+``` Shell
+/dmj/staff/akalinow/Publiczny/Modern_Particle_Physics_Experiments/a9c7162efbb680bc20479f00578dbfe0ecac658e76461ae46ce889dfb6ea6b68
+```
+
+## Running at computer lab or any other computer **within** the Faculty network. Computers connected to FUW.Open or Eduroam are **not** within the faculty network
+
+An Apptainer/Singularity containers are also available from a computing server of the Division of Elementary Particles and Interactions, ```zcobl3.hep.fuw.edu.pl```. This computer is available only from the internal Faculty network.
+
 
 ### Connect to the server 
 
-```
+``` Shell
 ssh login@zcobl3.hep.fuw.edu.pl -XY
 ```
 
@@ -18,7 +28,7 @@ where for `login` use your own login name
 
 ### Run Apptainer/Singularity
 
-```
+``` Shell
 ./Modern_Particle_Physics_Experiments/Docker/runSingularity.sh
 ```
 
@@ -26,7 +36,7 @@ After this command, the prompt should change to `Apptainer>` which indicates tha
 
 Inside the container you can start the `jupyter-lab` with:
 
-``` sh
+``` Shell
 jupyter-lab --no-browser --ip=zcobl3.hep.fuw.edu.pl --notebook-dir=$HOME
 ```
 
