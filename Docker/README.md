@@ -6,12 +6,19 @@ You can check the full list of packages installed in the image we will use: [aka
 
 ## Running at computer lab 
 
-An Apptainer/Singularity container for the Workshop is available from computers at the computer lab.
+An Apptainer/Singularity container is available from computers at the computer lab.
 After login please run:
 
 ``` Shell
-/dmj/staff/akalinow/Publiczny/Modern_Particle_Physics_Experiments/a9c7162efbb680bc20479f00578dbfe0ecac658e76461ae46ce889dfb6ea6b68
+/dmj/staff/akalinow/Publiczny/Modern_Particle_Physics_Experiments/mppe_container
 ```
+Inside the container you can start the `jupyter-lab` with:
+
+``` Shell
+jupyter-lab --no-browser --notebook-dir=$HOME
+```
+The `jupyter` should write a bunch of lines to the terminal. Find and copy the URL starting with `http://localhost`, then open a web browser and paste it.
+
 
 ## Running at computer lab or any other computer **within** the Faculty network. Computers connected to FUW.Open or Eduroam are **not** within the faculty network
 
