@@ -64,8 +64,8 @@ Depending on your system you can use either Apptainer/Singularity (Linux) or Doc
 1. Installation instructions:
 
     - [Windows](https://docs.docker.com/desktop/install/windows-install/),
-    - [MacOS](https://docs.docker.com/desktop/install/mac-install/),
-    - [Linux](https://docs.docker.com/desktop/install/linux-install/).
+    - [MacOS](https://docs.docker.com/desktop/install/mac-install/),
+    - [Linux](https://docs.docker.com/desktop/install/linux-install/).
     
     **Note**: after the installation one has to restart the computer.
 
