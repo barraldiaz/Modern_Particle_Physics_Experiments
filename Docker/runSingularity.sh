@@ -1,1 +1,1 @@
-singularity run --env SHELL=/bin/bash docker://akalinow/root-fedora35
+singularity run --env SHELL=/bin/bash --bind /home/$USER:/scratch docker://akalinow/root-fedora35

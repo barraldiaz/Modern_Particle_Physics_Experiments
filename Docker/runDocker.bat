@@ -9,6 +9,6 @@ echo Checking for container updates.
 docker pull akalinow/root-fedora35
 
 echo Starting container.
-docker run --name mppe -ti -v %WORKING_DIR%:/scratch -p 8000:8000 akalinow/root-fedora35
+docker run --name mppe -v %WORKING_DIR%:/scratch -w /home/jupyter -p 8000:8000 akalinow/root-fedora35 /home/jupyter/start-jupyter.sh
 
 pause
