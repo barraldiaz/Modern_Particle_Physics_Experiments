@@ -13,7 +13,7 @@ hVal = TH1D('hVal','hVal',300, -1., 2.)
 #
 # loop over experiments, each gives and average X_i
 #
-nDistrib = 50000 #
+nDistrib = 50000 # 25k is OK
 for idist in range (0,nDistrib) :
 
 
