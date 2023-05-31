@@ -1,3 +1,8 @@
+// Compile with command
+// g++ hough.cpp `root-config --cflags --libs`
+//
+// Code to be modified: function prepare_data 
+//
 #include<iostream>
 #include<cmath>
 #include <TH2D.h>
@@ -19,6 +24,12 @@ void style();
 // Function from official ROOT example, needed if you want to have
 // active ROOT windows
 void StandaloneApplication(int argc, char** argv);
+void plotLines(double x[],double y1[], double y2[],
+	       double y3[],double y4[], double y5[],
+	       double xn[],double yn[], int npoints, int nnoise);
+void plotHoughSpace(double x[],double y1[], double y2[],
+	       double y3[],double y4[], double y5[],
+	       double xn[],double yn[], int npoints, int nnoise);
 
 //-----------------------------------------------------------------------
 // Test of Hough transform for 5 straight lines (+ random noise)
@@ -47,7 +58,7 @@ void prepare_data(string option, int nnoise){
 
   // Prepare input to Hough algorithm: points along five straight lines
   int npoints=20;
-  
+
   double x[npoints];
   double y1[npoints];
   double y2[npoints];  
@@ -55,6 +66,8 @@ void prepare_data(string option, int nnoise){
   double y4[npoints];
   double y5[npoints];
 
+  // Generation of points belonging to 5 different lines
+  
   double j=0;
   for(int i=0; i<npoints; i++){
     x[i]=j;
@@ -76,10 +89,85 @@ void prepare_data(string option, int nnoise){
       yn[i]=-4+24*(double)rand()/RAND_MAX;      
     }
   }
-  // Plot data points
+  
+  // Plot data points in XY coordinate system
   if(option=="input"){ 
+    plotLines(x,y1,y2,y3,y4,y5,xn,yn,npoints,nnoise);
+  }
+  // Plot Hough r -theta space
+  else if(option=="hspace"){
+    plotHoughSpace(x,y1,y2,y3,y4,y5,xn,yn,npoints,nnoise);
+  } 
+}
+//-----------------------------------------------------------------------
+// Function from official ROOT example, needed if you want to have
+// active ROOT windows
+//-----------------------------------------------------------------------
+void StandaloneApplication(int argc, char** argv) {
+  string option;
+  // number of random noise points
+  int nnoise=0;
+  
+  // arguments of the main function:
+  if(argc==1){
+    cout << "Not enough arguments of the main function" << endl;
+    cout << "Should be:" << endl;
+    cout << "./a.out type_of_action" << endl;
+    cout << "or" << endl;
+    cout << "./a.out type_of_action nb_of_random_noise_points" << endl;   
+    cout << "Examples: " << endl;
+    cout << "1) Plot input points without noise: " << endl;
+    cout << "./a.out input" << endl;
+    cout << "2) Plot r-theta Hough space without noise: " << endl;
+    cout << "./a.out hspace" << endl;
+    cout << "3) Plot input points with 10 noise points: " << endl;    
+    cout << "./a.out input 10" << endl;
+    cout << "4) Plot r-theta Hough space with 10 noise points:" << endl;    
+    cout << "./a.out hspace 10" << endl;        
+    exit(EXIT_FAILURE);
+  }
+  else if(argc==2){
+    option=(string)argv[1];    
+  }
+  else if(argc==3){
+    option=(string)argv[1];
+    nnoise=atoi(argv[2]);
+  }
+    
+  prepare_data(option,nnoise);
+  //draw();
+}
 
-    TCanvas *canvas_input = new TCanvas("canvas_data","Input",150,10,700,700);  
+//-----------------------------------------------------------------------
+// Define the style of your plots
+//-----------------------------------------------------------------------
+void style(){
+
+  
+  gStyle->SetOptStat(0); // no statistics
+  gStyle->SetCanvasColor(kWhite);     // background is no longer mouse-dropping
+  // 
+  // gStyle->SetOptTitle(0); // no title
+  gStyle->SetTitleSize(0.05,"xy"); 
+    gStyle->SetTitleOffset(1.2,"x");
+  gStyle->SetTitleOffset(1.0,"y");
+
+  //gStyle->SetTextSize(1.1);
+  //gStyle->SetLabelSize(0.05,"xy");
+  gStyle->SetTitleSize(0.05,"xy");
+  gStyle->SetTitleOffset(1.0,"x");
+  gStyle->SetTitleOffset(1.0,"y");
+  gStyle->SetPadTopMargin(0.12);
+  gStyle->SetPadRightMargin(0.12);
+  gStyle->SetPadBottomMargin(0.12);
+  gStyle->SetPadLeftMargin(0.11);
+    
+}
+
+void plotLines(double x[],double y1[], double y2[],
+	       double y3[],double y4[], double y5[],
+	       double xn[],double yn[], int npoints, int nnoise){
+     TCanvas *canvas_input = new TCanvas("canvas_data","Input",150,10,700,700);  
     canvas_input->Clear();
     canvas_input->Divide(2,2,0.005,0.005);
     
@@ -117,18 +205,18 @@ void prepare_data(string option, int nnoise){
     canvas_input->Update();
     gPad->Modified();
     gPad->Update();
-    
     //canvas_input->Print("hough_input.pdf");
 
-  }
-  // Plot Hough r -theta space
-  else if(option=="hspace"){
-  
+}
+void plotHoughSpace(double x[],double y1[], double y2[],
+	       double y3[],double y4[], double y5[],
+	       double xn[],double yn[], int npoints, int nnoise){
+
   int range=180;
   int nbinsx=2*range;
   int nbinsy=100;
 
-  TH2D * ho1 = new TH2D("ho1","Hough 1 track ",nbinsx,90.,180.,nbinsy,-5.,5.);
+  TH2D * ho1 = new TH2D("ho1","Hough track 1",nbinsx,90.,180.,nbinsy,-5.,5.);
   TH2D * ho2 = new TH2D("ho2","Hough track 2",nbinsx,90.,180.,nbinsy,-5.,5.);
   TH2D * ho3 = new TH2D("ho3","Hough track 3",nbinsx,90.,180.,nbinsy,-5.,5.);
   TH2D * ho4 = new TH2D("ho4","Hough track 4",nbinsx,90.,180.,nbinsy,-5.,5.);
@@ -222,69 +310,4 @@ void prepare_data(string option, int nnoise){
 
   canvas_hough->Update();
   //canvas_hough->Print("hough_space.pdf");
-  }
-}
-//-----------------------------------------------------------------------
-// Function from official ROOT example, needed if you want to have
-// active ROOT windows
-//-----------------------------------------------------------------------
-void StandaloneApplication(int argc, char** argv) {
-  string option;
-  // number of random noise points
-  int nnoise=0;
-  
-  // arguments of the main function:
-  if(argc==1){
-    cout << "Not enough arguments of the main function" << endl;
-    cout << "Should be:" << endl;
-    cout << "./hough type_of_action" << endl;
-    cout << "or" << endl;
-    cout << "./hough type_of_action nb_of_random_noise_points" << endl;   
-    cout << "Examples: " << endl;
-    cout << "1) Plot input points without noise: " << endl;
-    cout << "./hough input" << endl;
-    cout << "2) Plot r-theta Hough space without noise: " << endl;
-    cout << "./hough hspace" << endl;
-    cout << "3) Plot input points with 10 noise points: " << endl;    
-    cout << "./hough input 10" << endl;
-    cout << "4) Plot r-theta Hough space with 10 noise points:" << endl;    
-    cout << "./hough hspace 10" << endl;        
-    exit(EXIT_FAILURE);
-  }
-  else if(argc==2){
-    option=(string)argv[1];    
-  }
-  else if(argc==3){
-    option=(string)argv[1];
-    nnoise=atoi(argv[2]);
-  }
-    
-  prepare_data(option,nnoise);
-  //draw();
-}
-
-//-----------------------------------------------------------------------
-// Define the style of your plots
-//-----------------------------------------------------------------------
-void style(){
-
-  
-  gStyle->SetOptStat(0); // no statistics
-  gStyle->SetCanvasColor(kWhite);     // background is no longer mouse-dropping
-  // 
-  // gStyle->SetOptTitle(0); // no title
-  gStyle->SetTitleSize(0.05,"xy"); 
-    gStyle->SetTitleOffset(1.2,"x");
-  gStyle->SetTitleOffset(1.0,"y");
-
-  //gStyle->SetTextSize(1.1);
-  //gStyle->SetLabelSize(0.05,"xy");
-  gStyle->SetTitleSize(0.05,"xy");
-  gStyle->SetTitleOffset(1.0,"x");
-  gStyle->SetTitleOffset(1.0,"y");
-  gStyle->SetPadTopMargin(0.12);
-  gStyle->SetPadRightMargin(0.12);
-  gStyle->SetPadBottomMargin(0.12);
-  gStyle->SetPadLeftMargin(0.11);
-    
 }

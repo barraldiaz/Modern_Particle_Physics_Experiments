@@ -1,3 +1,6 @@
+// Compile with command
+// g++ first_root.cpp `root-config --cflags --libs`
+//
 #include  <TRandom3.h>
 #include<iostream>
 
